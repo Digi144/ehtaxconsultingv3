@@ -871,13 +871,15 @@ const Hero = () => {
             {t.hero.subtitle}
           </p>
           
-          <a 
-            ref={heroCtaRef}
-            href="#kontakt" 
-            className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 mb-12 md:mb-16 inline-block"
-          >
-            {t.hero.cta}
-          </a>
+          <div className="w-full flex justify-center mb-12 md:mb-16">
+            <a 
+              ref={heroCtaRef}
+              href="#kontakt" 
+              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block"
+            >
+              {t.hero.cta}
+            </a>
+          </div>
         </motion.div>
         
         {/* Feature boxes - positioned at bottom */}
