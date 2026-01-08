@@ -871,6 +871,40 @@ const Hero = () => {
           src="/images/hero-bg.webp" 
           alt="" 
           className="w-full h-full object-cover"
+          onLoad={() => {
+            const logData = {
+              location: 'App.jsx:Hero:imageOnLoad',
+              message: 'Hero image onLoad event fired',
+              data: {
+                imageSrc: heroImageRef.current?.src,
+                imageNaturalWidth: heroImageRef.current?.naturalWidth,
+                imageNaturalHeight: heroImageRef.current?.naturalHeight,
+                windowLocation: window.location.href
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'A'
+            };
+            fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logData)}).catch(()=>{});
+          }}
+          onError={(e) => {
+            const errorLog = {
+              location: 'App.jsx:Hero:imageOnError',
+              message: 'Hero image onError event fired',
+              data: {
+                imageSrc: heroImageRef.current?.src,
+                error: e.type,
+                windowLocation: window.location.href,
+                attemptedSrc: '/images/hero-bg.webp'
+              },
+              timestamp: Date.now(),
+              sessionId: 'debug-session',
+              runId: 'run1',
+              hypothesisId: 'A'
+            };
+            fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(errorLog)}).catch(()=>{});
+          }}
         />
         <div className="absolute inset-0 bg-white/80"></div>
       </div>
