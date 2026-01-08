@@ -713,7 +713,11 @@ const Hero = () => {
             imageNaturalHeight: img.naturalHeight,
             imageClientWidth: img.clientWidth,
             imageClientHeight: img.clientHeight,
-            imageCurrentSrc: img.currentSrc || img.src
+            imageCurrentSrc: img.currentSrc || img.src,
+            imageVisible: img.offsetWidth > 0 && img.offsetHeight > 0,
+            imageParentVisible: img.parentElement?.offsetWidth > 0,
+            windowLocation: window.location.href,
+            isProduction: !window.location.href.includes('localhost')
           },
           timestamp: Date.now(),
           sessionId: 'debug-session',
@@ -723,7 +727,23 @@ const Hero = () => {
         fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logData)}).catch(()=>{});
       };
       img.addEventListener('load', () => logImageLoad('loaded', 'loaded'));
-      img.addEventListener('error', () => logImageLoad('error', 'failed'));
+      img.addEventListener('error', (e) => {
+        const errorLog = {
+          location: 'App.jsx:Hero:imageError',
+          message: 'Hero image failed to load',
+          data: {
+            imageSrc: img.src,
+            error: e.message || 'Image load error',
+            windowLocation: window.location.href,
+            isProduction: !window.location.href.includes('localhost')
+          },
+          timestamp: Date.now(),
+          sessionId: 'debug-session',
+          runId: 'run1',
+          hypothesisId: 'A'
+        };
+        fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(errorLog)}).catch(()=>{});
+      });
       if (img.complete) logImageLoad('already', 'already loaded');
       return () => {
         img.removeEventListener('load', logImageLoad);
