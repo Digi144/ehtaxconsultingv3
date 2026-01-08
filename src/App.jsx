@@ -872,13 +872,14 @@ const Hero = () => {
           alt="" 
           className="w-full h-full object-cover"
           onLoad={() => {
+            const img = heroImageRef.current;
             const logData = {
               location: 'App.jsx:Hero:imageOnLoad',
               message: 'Hero image onLoad event fired',
               data: {
-                imageSrc: heroImageRef.current?.src,
-                imageNaturalWidth: heroImageRef.current?.naturalWidth,
-                imageNaturalHeight: heroImageRef.current?.naturalHeight,
+                imageSrc: img?.src,
+                imageNaturalWidth: img?.naturalWidth,
+                imageNaturalHeight: img?.naturalHeight,
                 windowLocation: window.location.href
               },
               timestamp: Date.now(),
@@ -886,14 +887,16 @@ const Hero = () => {
               runId: 'run1',
               hypothesisId: 'A'
             };
+            console.log('[HERO IMAGE DEBUG] Image loaded successfully:', logData);
             fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logData)}).catch(()=>{});
           }}
           onError={(e) => {
+            const img = heroImageRef.current;
             const errorLog = {
               location: 'App.jsx:Hero:imageOnError',
               message: 'Hero image onError event fired',
               data: {
-                imageSrc: heroImageRef.current?.src,
+                imageSrc: img?.src,
                 error: e.type,
                 windowLocation: window.location.href,
                 attemptedSrc: '/images/hero-bg.webp'
@@ -903,6 +906,7 @@ const Hero = () => {
               runId: 'run1',
               hypothesisId: 'A'
             };
+            console.error('[HERO IMAGE DEBUG] Image failed to load:', errorLog);
             fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(errorLog)}).catch(()=>{});
           }}
         />
