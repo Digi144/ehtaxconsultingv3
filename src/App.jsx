@@ -590,6 +590,7 @@ const Navbar = () => {
             <a 
               href="#kontakt" 
               className="ml-6 bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block"
+              style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem', lineHeight: '1.25rem' }}
             >
               {t.nav.contactCta}
             </a>
