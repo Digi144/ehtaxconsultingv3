@@ -871,6 +871,7 @@ const Hero = () => {
           src="/images/hero-bg.webp" 
           alt="" 
           className="w-full h-full object-cover"
+          style={{ display: 'block' }}
           onLoad={() => {
             const img = heroImageRef.current;
             const logData = {
@@ -910,7 +911,7 @@ const Hero = () => {
             fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(errorLog)}).catch(()=>{});
           }}
         />
-        <div className="absolute inset-0 bg-white/80"></div>
+        <div className="absolute inset-0 bg-white/80 z-10"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-40 pb-16 md:pb-24 flex-grow flex flex-col">
@@ -929,11 +930,11 @@ const Hero = () => {
             {t.hero.subtitle}
           </p>
           
-          <div className="w-full flex justify-center mb-12 md:mb-16">
+          <div className="flex justify-center mb-12 md:mb-16">
             <a 
               ref={heroCtaRef}
               href="#kontakt" 
-              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block"
+              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block whitespace-nowrap"
             >
               {t.nav.contactCta}
             </a>
