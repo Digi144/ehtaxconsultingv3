@@ -610,14 +610,15 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 top-0 z-50">
+        <div className="md:hidden fixed inset-0 z-50">
           <div 
-            className="absolute inset-0 bg-black/40 backdrop-blur-md"
+            className="fixed inset-0 bg-black/40 backdrop-blur-xl"
             onClick={() => setIsOpen(false)}
+            style={{ zIndex: 49 }}
           ></div>
           
-          <div className="relative mx-4 mt-20 bg-white border border-gray-200 shadow-2xl overflow-hidden rounded-lg">
-            <div className="bg-gray-50 px-5 py-4">
+          <div className="relative w-full bg-white border-b border-gray-200 shadow-lg overflow-hidden" style={{ zIndex: 50 }}>
+            <div className="bg-gray-50 px-4 sm:px-6 py-4">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
                   <img 
@@ -636,7 +637,7 @@ const Navbar = () => {
               </div>
             </div>
             
-            <div className="px-5 py-4 space-y-1">
+            <div className="px-4 sm:px-6 py-4 space-y-1">
               <a href="#home" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-base font-medium text-[#1a1a1a] border-b border-gray-100 hover:bg-gray-50">{t.nav.home}</a>
               <a href="#uber-mich" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-base font-medium text-[#1a1a1a] border-b border-gray-100 hover:bg-gray-50">{t.nav.about}</a>
               <a href="#leistungen" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-base font-medium text-[#1a1a1a] border-b border-gray-100 hover:bg-gray-50">{t.nav.services}</a>
@@ -658,7 +659,7 @@ const Navbar = () => {
                 </button>
               </div>
               
-              <div className="pt-2 pb-1">
+              <div className="pt-2 pb-4">
                 <a 
                   href="#kontakt" 
                   onClick={() => setIsOpen(false)}
@@ -686,7 +687,7 @@ const Hero = () => {
       location: 'App.jsx:Hero:useEffect',
       message: 'Hero component mounted',
       data: {
-        imageSrc: '/images/hero-bg_vienna_white.webp',
+        imageSrc: '/images/hero-bg_vienna-saturated.webp',
         ctaText: t.hero.cta,
         ctaClassName: 'bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 mb-12 md:mb-16'
       },
@@ -966,7 +967,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <img 
           ref={heroImageRef}
-          src="/images/hero-bg_vienna_white.webp" 
+          src="/images/hero-bg_vienna-saturated.webp" 
           alt="" 
           className="w-full h-full object-cover"
           style={{ display: 'block' }}
@@ -998,7 +999,7 @@ const Hero = () => {
                 imageSrc: img?.src,
                 error: e.type,
                 windowLocation: window.location.href,
-                attemptedSrc: '/images/hero-bg_vienna_white.webp'
+                attemptedSrc: '/images/hero-bg_vienna-saturated.webp'
               },
               timestamp: Date.now(),
               sessionId: 'debug-session',
