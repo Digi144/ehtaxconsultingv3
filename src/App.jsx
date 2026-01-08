@@ -921,7 +921,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="w-full text-center flex-grow flex flex-col items-center justify-center"
         >
-          <h1 className="font-semibold leading-tight mb-6 md:mb-8 text-[#1a1a1a] text-center">
+          <h1 className="font-semibold tracking-tight leading-tight mb-6 md:mb-8 text-[#1a1a1a] text-center">
             <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2">{t.hero.titleLine1}</span>
             <span className="block text-[1.05rem] sm:text-[1.31rem] md:text-[1.58rem] lg:text-[2.1rem] xl:text-[2.63rem]">{t.hero.titleLine2}</span>
           </h1>
