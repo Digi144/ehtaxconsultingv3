@@ -1204,11 +1204,11 @@ const Services = () => {
   return (
     <section id="leistungen" className="py-16 md:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 md:mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1a1a1a] mb-4">
             {t.services.title}
           </h2>
-          <p className="text-base md:text-lg text-[#4a4a4a] max-w-2xl">
+          <p className="text-base md:text-lg text-[#4a4a4a] max-w-2xl mx-auto">
             {t.services.subtitle}
           </p>
         </div>
