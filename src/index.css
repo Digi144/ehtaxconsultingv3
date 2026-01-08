@@ -1,43 +1,49 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @theme {
-  --color-brand-navy: #19215f;
+  --color-dark-bg: #f8f9fa;
+  --color-dark-surface: #ffffff;
+  --color-dark-card: #f0f2f5;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4a4a4a;
+  --color-brand-blue: #1e3a5f;
+  --color-brand-blue-light: #2a4d7a;
+  --color-brand-blue-dark: #152a44;
   --color-brand-green: #185615;
-  --color-brand-navy-light: #2C3E50;
-  --color-brand-navy-dark: #1A2433;
   --color-brand-green-light: #27AE60;
-  --color-brand-green-dark: #1E8449;
+  --color-brand-green-dark: #0f3d0f;
   
-  --color-neutral-soft-white: #FAFAFA;
-  --color-neutral-warm-white: #FDFBF7;
-  --color-neutral-light-gray: #F5F5F5;
-  --color-neutral-body-text: #333333;
-
-  --font-sans: "Montserrat", "Lato", "Open Sans", "sans-serif";
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 @layer base {
+  * {
+    @apply antialiased;
+  }
+  
   body {
-    @apply bg-neutral-soft-white text-neutral-body-text font-sans;
+    @apply bg-dark-bg text-text-primary font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold text-brand-navy-dark;
+    @apply font-semibold text-text-primary;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-brand-navy text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-brand-navy-light hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:shadow-md;
+    @apply bg-text-primary text-dark-bg px-8 py-4 rounded-none font-semibold transition-all duration-300 hover:bg-text-secondary hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-secondary {
-    @apply border-2 border-brand-navy text-brand-navy px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-brand-navy hover:text-white hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:shadow-md;
+    @apply border-2 border-text-primary text-text-primary px-8 py-4 rounded-none font-semibold transition-all duration-300 hover:bg-text-primary hover:text-dark-bg hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .card {
-    @apply bg-white p-8 rounded-xl shadow-sm border border-neutral-light-gray transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+    @apply bg-dark-card p-8 transition-all duration-300 hover:-translate-y-1;
   }
 }
