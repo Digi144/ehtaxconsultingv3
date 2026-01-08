@@ -589,8 +589,8 @@ const Navbar = () => {
             {/* CTA Button */}
             <a 
               href="#kontakt" 
-              className="ml-6 bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block"
-              style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem', lineHeight: '1.25rem' }}
+              className="header-cta-button ml-6 bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 whitespace-nowrap rounded-md"
+              style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem', lineHeight: '1.25rem', width: '181px', height: '44px', minWidth: '181px', maxWidth: '181px', display: 'inline-block', boxSizing: 'border-box', margin: '0 0 0 1.5rem', flexShrink: '0' }}
             >
               {t.nav.contactCta}
             </a>
@@ -662,7 +662,7 @@ const Navbar = () => {
                 <a 
                   href="#kontakt" 
                   onClick={() => setIsOpen(false)}
-                  className="block text-center py-3.5 font-semibold text-white bg-[#1e3a5f] hover:bg-[#2a4d7a] transition-all"
+                  className="block text-center py-3.5 font-semibold text-white bg-[#1e3a5f] hover:bg-[#2a4d7a] transition-all rounded-md"
                 >
                   {t.nav.contactCta}
                 </a>
@@ -759,7 +759,7 @@ const Hero = () => {
     const checkButtonStyles = () => {
       const heroCta = heroCtaRef.current;
       const headerCta = Array.from(document.querySelectorAll('nav a[href="#kontakt"]')).find(el => 
-                         el.classList.contains('bg-[#1e3a5f]') || el.classList.contains('ml-6')
+                         el.classList.contains('bg-[\\#1e3a5f]')
                        );
       
       const logRefs = {
@@ -863,6 +863,103 @@ const Hero = () => {
     }
   ];
   
+  // #region agent log
+  useEffect(() => {
+    const checkContainerConstraints = () => {
+      const heroCta = heroCtaRef.current;
+      const headerCta = Array.from(document.querySelectorAll('nav a[href="#kontakt"]')).find(el => 
+        el.classList.contains('bg-\\[\\#1e3a5f\\]') || el.classList.contains('ml-6')
+      );
+      
+      if (heroCta && headerCta) {
+        const heroStyles = window.getComputedStyle(heroCta);
+        const headerStyles = window.getComputedStyle(headerCta);
+        const heroRect = heroCta.getBoundingClientRect();
+        const headerRect = headerCta.getBoundingClientRect();
+        
+        const logData = {
+          location: 'App.jsx:Hero:visualComparison',
+          message: 'Complete visual comparison of both buttons',
+          data: {
+            heroButton: {
+              width: heroRect.width,
+              height: heroRect.height,
+              offsetWidth: heroCta.offsetWidth,
+              offsetHeight: heroCta.offsetHeight,
+              computedWidth: heroStyles.width,
+              computedHeight: heroStyles.height,
+              padding: `${heroStyles.paddingTop} ${heroStyles.paddingRight} ${heroStyles.paddingBottom} ${heroStyles.paddingLeft}`,
+              fontSize: heroStyles.fontSize,
+              lineHeight: heroStyles.lineHeight,
+              fontFamily: heroStyles.fontFamily,
+              fontWeight: heroStyles.fontWeight,
+              letterSpacing: heroStyles.letterSpacing,
+              borderWidth: `${heroStyles.borderTopWidth} ${heroStyles.borderRightWidth} ${heroStyles.borderBottomWidth} ${heroStyles.borderLeftWidth}`,
+              borderRadius: heroStyles.borderRadius,
+              boxShadow: heroStyles.boxShadow,
+              display: heroStyles.display,
+              boxSizing: heroStyles.boxSizing,
+              minWidth: heroStyles.minWidth,
+              maxWidth: heroStyles.maxWidth,
+              flexShrink: heroStyles.flexShrink,
+              textContent: heroCta.textContent?.trim(),
+              textLength: heroCta.textContent?.trim().length
+            },
+            headerButton: {
+              width: headerRect.width,
+              height: headerRect.height,
+              offsetWidth: headerCta.offsetWidth,
+              offsetHeight: headerCta.offsetHeight,
+              computedWidth: headerStyles.width,
+              computedHeight: headerStyles.height,
+              padding: `${headerStyles.paddingTop} ${headerStyles.paddingRight} ${headerStyles.paddingBottom} ${headerStyles.paddingLeft}`,
+              fontSize: headerStyles.fontSize,
+              lineHeight: headerStyles.lineHeight,
+              fontFamily: headerStyles.fontFamily,
+              fontWeight: headerStyles.fontWeight,
+              letterSpacing: headerStyles.letterSpacing,
+              borderWidth: `${headerStyles.borderTopWidth} ${headerStyles.borderRightWidth} ${headerStyles.borderBottomWidth} ${headerStyles.borderLeftWidth}`,
+              borderRadius: headerStyles.borderRadius,
+              boxShadow: headerStyles.boxShadow,
+              display: headerStyles.display,
+              boxSizing: headerStyles.boxSizing,
+              minWidth: headerStyles.minWidth,
+              maxWidth: headerStyles.maxWidth,
+              flexShrink: headerStyles.flexShrink,
+              textContent: headerCta.textContent?.trim(),
+              textLength: headerCta.textContent?.trim().length
+            },
+            sizesMatch: heroRect.width === headerRect.width && heroRect.height === headerRect.height,
+            widthDiff: Math.abs(heroRect.width - headerRect.width),
+            heightDiff: Math.abs(heroRect.height - headerRect.height),
+            allPropertiesMatch: {
+              width: heroRect.width === headerRect.width,
+              height: heroRect.height === headerRect.height,
+              padding: heroStyles.padding === headerStyles.padding,
+              fontSize: heroStyles.fontSize === headerStyles.fontSize,
+              lineHeight: heroStyles.lineHeight === headerStyles.lineHeight,
+              borderRadius: heroStyles.borderRadius === headerStyles.borderRadius,
+              display: heroStyles.display === headerStyles.display,
+              boxSizing: heroStyles.boxSizing === headerStyles.boxSizing,
+              minWidth: heroStyles.minWidth === headerStyles.minWidth,
+              textContent: heroCta.textContent?.trim() === headerCta.textContent?.trim()
+            }
+          },
+          timestamp: Date.now(),
+          sessionId: 'debug-session',
+          runId: 'visual-comparison',
+          hypothesisId: 'F'
+        };
+        console.log('[VISUAL COMPARISON]', logData);
+        fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logData)}).catch(()=>{});
+      }
+    };
+    
+    const timeout = setTimeout(checkContainerConstraints, 1500);
+    return () => clearTimeout(timeout);
+  }, []);
+  // #endregion
+  
   return (
     <section id="home" className="relative min-h-screen flex flex-col overflow-hidden">
       {/* Background Image */}
@@ -922,21 +1019,21 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="w-full text-center flex-grow flex flex-col items-center justify-center"
         >
-          <h1 className="font-semibold tracking-tight leading-tight mb-6 md:mb-8 text-[#1a1a1a] text-center">
+          <h1 className="font-semibold tracking-tight leading-tight mb-6 md:mb-8 text-[#1e3a5f] text-center" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", letterSpacing: '-0.02em' }}>
             <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2">{t.hero.titleLine1}</span>
             <span className="block text-[1.05rem] sm:text-[1.31rem] md:text-[1.58rem] lg:text-[2.1rem] xl:text-[2.63rem]">{t.hero.titleLine2}</span>
           </h1>
           
-          <p className="text-lg sm:text-xl md:text-2xl text-[#4a4a4a] leading-relaxed mb-8 md:mb-10 max-w-3xl mx-auto px-4">
+          <p className="text-lg sm:text-xl md:text-2xl text-[#1e3a5f] leading-relaxed mb-8 md:mb-10 max-w-3xl mx-auto px-4">
             {t.hero.subtitle}
           </p>
           
-          <div className="flex justify-center mb-12 md:mb-16">
+          <div className="text-center my-8 md:my-10 w-full">
             <a 
               ref={heroCtaRef}
               href="#kontakt" 
-              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block"
-              style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem', lineHeight: '1.25rem' }}
+              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 whitespace-nowrap rounded-md"
+              style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem', lineHeight: '1.25rem', width: '181px', height: '44px', minWidth: '181px', maxWidth: '181px', display: 'inline-block', boxSizing: 'border-box', margin: '0', flexShrink: '0' }}
             >
               {t.nav.contactCta}
             </a>
@@ -1187,7 +1284,7 @@ const FeatureCard = ({ number, icon: Icon, title, description, points, note, lea
         {learnMore && (
           <a 
             href="#kontakt"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1e3a5f] text-white text-sm md:text-base font-semibold transition-all hover:bg-[#2a4d7a] mt-4"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1e3a5f] text-white text-sm md:text-base font-semibold transition-all hover:bg-[#2a4d7a] mt-4 rounded-md"
           >
             {learnMore}
             <ArrowRight size={16} />
@@ -1424,7 +1521,7 @@ const CTA = () => {
             </p>
             <a 
               href="#kontakt" 
-              className="inline-block bg-[#1e3a5f] text-white px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20"
+              className="inline-block bg-[#1e3a5f] text-white px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 rounded-md"
             >
               {t.cta.button}
             </a>
@@ -1515,7 +1612,7 @@ const Contact = () => {
               </div>
               
               <button 
-                className="w-full py-4 bg-[#1e3a5f] text-white text-base font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20"
+                className="w-full py-4 bg-[#1e3a5f] text-white text-base font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 rounded-md"
               >
                 {t.contact.form.submit}
               </button>
@@ -1539,7 +1636,14 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
           <div className="sm:col-span-2">
-            <div className="text-xl font-semibold mb-4 text-[#1a1a1a]">EH Tax Consulting</div>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/images/eh-logo.webp" 
+                alt="EH Tax Consulting Logo" 
+                className="h-10 w-auto transition-all duration-300"
+              />
+              <div className="text-xl font-semibold text-[#1a1a1a]">EH Tax Consulting</div>
+            </div>
             <p className="text-[#4a4a4a] max-w-sm mb-6 text-sm">
               {t.footer.description}
             </p>
