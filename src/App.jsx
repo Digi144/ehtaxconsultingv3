@@ -737,9 +737,8 @@ const Hero = () => {
   useEffect(() => {
     const checkButtonStyles = () => {
       const heroCta = heroCtaRef.current;
-      const headerCta = document.querySelector('nav a[href="#kontakt"]:not([ref])') || 
-                       Array.from(document.querySelectorAll('nav a[href="#kontakt"]')).find(el => 
-                         el.textContent?.includes(t.nav.contactCta) || el.classList.contains('ml-6')
+      const headerCta = Array.from(document.querySelectorAll('nav a[href="#kontakt"]')).find(el => 
+                         el.classList.contains('bg-[#1e3a5f]') || el.classList.contains('ml-6')
                        );
       
       const logRefs = {
@@ -861,7 +860,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full text-center flex-grow flex flex-col justify-center"
+          className="w-full text-center flex-grow flex flex-col items-center justify-center"
         >
           <h1 className="font-semibold leading-tight mb-6 md:mb-8 text-[#1a1a1a] text-center">
             <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-2">{t.hero.titleLine1}</span>
