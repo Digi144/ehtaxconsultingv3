@@ -53,6 +53,8 @@ const translations = {
       titleLine2: "für Ihre GmbH",
       subtitle: "– persönlich, präzise und aus einer Hand.",
       cta: "Erstgespräch vereinbaren",
+      learnMore: "Mehr erfahren",
+      location: "Wien, Österreich",
       badge1: "Geprüfte Steuerberaterin",
       badge2: "KWT-Mitglied",
       badge3: "Digitale Prozesse"
@@ -280,6 +282,8 @@ const translations = {
       titleLine2: "для вашей GmbH",
       subtitle: "– лично, точно и из одних рук.",
       cta: "Записаться на консультацию",
+      learnMore: "Узнать больше",
+      location: "Вена, Австрия",
       badge1: "Сертифицированный налоговый консультант",
       badge2: "Член KWT",
       badge3: "Цифровые процессы"
@@ -846,24 +850,6 @@ const Hero = () => {
   }, [t.nav.contactCta]);
   // #endregion
   
-  const features = [
-    {
-      icon: User,
-      title: t.features.personal.title,
-      description: t.features.personal.description
-    },
-    {
-      icon: Shield,
-      title: t.features.secure.title,
-      description: t.features.secure.description
-    },
-    {
-      icon: Monitor,
-      title: t.features.digital.title,
-      description: t.features.digital.description
-    }
-  ];
-  
   // #region agent log
   useEffect(() => {
     const checkContainerConstraints = () => {
@@ -961,13 +947,31 @@ const Hero = () => {
   }, []);
   // #endregion
   
+  const features = [
+    {
+      icon: User,
+      title: t.features.personal.title,
+      description: t.features.personal.description
+    },
+    {
+      icon: Shield,
+      title: t.features.secure.title,
+      description: t.features.secure.description
+    },
+    {
+      icon: Monitor,
+      title: t.features.digital.title,
+      description: t.features.digital.description
+    }
+  ];
+
   return (
     <section id="home" className="relative min-h-screen flex flex-col overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image - full background */}
       <div className="absolute inset-0 z-0">
         <img 
           ref={heroImageRef}
-          src="/images/hero-bg_vienna-saturated.webp" 
+          src="/images/original_style_16_9.webp" 
           alt="" 
           className="w-full h-full object-cover"
           style={{ display: 'block' }}
@@ -999,7 +1003,7 @@ const Hero = () => {
                 imageSrc: img?.src,
                 error: e.type,
                 windowLocation: window.location.href,
-                attemptedSrc: '/images/hero-bg_vienna-saturated.webp'
+                attemptedSrc: '/images/original_style_16_9.webp'
               },
               timestamp: Date.now(),
               sessionId: 'debug-session',
@@ -1013,49 +1017,103 @@ const Hero = () => {
         <div className="absolute inset-0 bg-white/40 z-10"></div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-40 pb-16 md:pb-24 flex-grow flex flex-col">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28 pb-16 md:pb-24 flex-grow flex flex-col">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full text-center flex-grow flex flex-col items-center justify-center"
+          className="w-full max-w-4xl flex-grow flex flex-col justify-center"
         >
-          <h1 className="font-semibold tracking-tight leading-tight mb-6 md:mb-8 text-[#1e3a5f] text-center" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", letterSpacing: '-0.02em' }}>
-            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2">{t.hero.titleLine1}</span>
-            <span className="block text-[1.05rem] sm:text-[1.31rem] md:text-[1.58rem] lg:text-[2.1rem] xl:text-[2.63rem]">{t.hero.titleLine2}</span>
+          <h1 className="font-bold tracking-tight leading-tight mb-6 md:mb-8 text-[#1a1a1a] text-left hero-title" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", letterSpacing: '-0.02em' }}>
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2 whitespace-nowrap hero-title-line1">{t.hero.titleLine1}</span>
+            <span className="block font-bold whitespace-nowrap hero-title-line2">{t.hero.titleLine2}</span>
           </h1>
           
-          <p className="text-lg sm:text-xl md:text-2xl text-[#1e3a5f] leading-relaxed mb-8 md:mb-10 max-w-3xl mx-auto px-4">
+          <p className="text-lg sm:text-xl md:text-2xl text-[#1a1a1a] leading-relaxed mb-10 md:mb-12 max-w-2xl text-left">
             {t.hero.subtitle}
           </p>
           
-          <div className="text-center my-8 md:my-10 w-full">
+          <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6 mb-8 md:mb-12">
             <a 
               ref={heroCtaRef}
               href="#kontakt" 
-              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 whitespace-nowrap rounded-md"
-              style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem', lineHeight: '1.25rem', width: '181px', height: '44px', minWidth: '181px', maxWidth: '181px', display: 'inline-block', boxSizing: 'border-box', margin: '0', flexShrink: '0' }}
+              className="bg-[#1e3a5f] text-white px-8 py-4 text-sm font-semibold transition-all hover:bg-[#2a4d7a] whitespace-nowrap inline-block rounded-md"
+              style={{ fontSize: '0.875rem', padding: '1rem 2rem', lineHeight: '1.25rem', display: 'inline-block', boxSizing: 'border-box' }}
             >
-              {t.nav.contactCta}
+              {t.hero.cta.toUpperCase()}
+            </a>
+            <a 
+              href="#leistungen"
+              className="text-[#1a1a1a] text-sm font-medium transition-all hover:text-[#4a4a4a] inline-flex items-center gap-2"
+            >
+              {t.hero.learnMore.toUpperCase()} <ArrowRight size={16} />
             </a>
           </div>
         </motion.div>
         
         {/* Feature boxes - positioned at bottom */}
-        <div className="grid sm:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto w-full mt-8 md:mt-12">
+        <div className="grid sm:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto w-full mt-auto">
           {features.map((feature, i) => (
             <motion.div 
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-              className="bg-white/80 backdrop-blur-sm p-4 md:p-5 rounded-lg border border-gray-200/50 shadow-md text-left"
+              className="bg-white p-6 md:p-8 border border-gray-200 shadow-sm text-left"
             >
-              <div className="w-10 h-10 bg-[#1e3a5f]/10 rounded-lg flex items-center justify-center mb-3">
-                <feature.icon size={20} className="text-[#1e3a5f]" />
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-[#1e3a5f]/10 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                <feature.icon size={24} className="text-[#1e3a5f]" />
               </div>
-              <h3 className="text-base md:text-lg font-semibold mb-2 text-[#1a1a1a]">{feature.title}</h3>
-              <p className="text-xs md:text-sm text-[#4a4a4a] leading-relaxed">{feature.description}</p>
+              <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 text-[#1a1a1a]">{feature.title}</h3>
+              <p className="text-sm md:text-base text-[#4a4a4a]">{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Feature Highlights Section
+const FeatureHighlights = () => {
+  const { t } = useLanguage();
+  
+  const features = [
+    {
+      icon: User,
+      title: t.features.personal.title,
+      description: t.features.personal.description
+    },
+    {
+      icon: Shield,
+      title: t.features.secure.title,
+      description: t.features.secure.description
+    },
+    {
+      icon: Monitor,
+      title: t.features.digital.title,
+      description: t.features.digital.description
+    }
+  ];
+
+  return (
+    <section className="py-16 md:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid sm:grid-cols-3 gap-6 md:gap-8">
+          {features.map((feature, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="bg-white p-6 md:p-8 border border-gray-200 shadow-sm text-left"
+            >
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-[#1e3a5f]/10 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                <feature.icon size={24} className="text-[#1e3a5f]" />
+              </div>
+              <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 text-[#1a1a1a]">{feature.title}</h3>
+              <p className="text-sm md:text-base text-[#4a4a4a]">{feature.description}</p>
             </motion.div>
           ))}
         </div>
