@@ -922,8 +922,7 @@ const Hero = () => {
           className="w-full text-center flex-grow flex flex-col items-center justify-center"
         >
           <h1 className="font-semibold leading-tight mb-6 md:mb-8 text-[#1a1a1a] text-center">
-            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-2">{t.hero.titleLine1}</span>
-            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">{t.hero.titleLine2}</span>
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">{t.hero.titleLine1} {t.hero.titleLine2}</span>
           </h1>
           
           <p className="text-lg sm:text-xl md:text-2xl text-[#4a4a4a] leading-relaxed mb-8 md:mb-10 max-w-3xl mx-auto px-4">
