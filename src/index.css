@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+@theme {
+  --color-brand-navy: #19215f;
+  --color-brand-green: #185615;
+  --color-brand-navy-light: #2C3E50;
+  --color-brand-navy-dark: #1A2433;
+  --color-brand-green-light: #27AE60;
+  --color-brand-green-dark: #1E8449;
+  
+  --color-neutral-soft-white: #FAFAFA;
+  --color-neutral-warm-white: #FDFBF7;
+  --color-neutral-light-gray: #F5F5F5;
+  --color-neutral-body-text: #333333;
+
+  --font-sans: "Montserrat", "Lato", "Open Sans", "sans-serif";
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-soft-white text-neutral-body-text font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-brand-navy-dark;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-navy text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-brand-navy-light hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-brand-navy text-brand-navy px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-brand-navy hover:text-white hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:shadow-md;
+  }
+
+  .card {
+    @apply bg-white p-8 rounded-xl shadow-sm border border-neutral-light-gray transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+  }
+}
