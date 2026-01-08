@@ -934,7 +934,7 @@ const Hero = () => {
             <a 
               ref={heroCtaRef}
               href="#kontakt" 
-              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block whitespace-nowrap"
+              className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block"
             >
               {t.nav.contactCta}
             </a>
