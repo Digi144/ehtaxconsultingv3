@@ -686,7 +686,7 @@ const Hero = () => {
       location: 'App.jsx:Hero:useEffect',
       message: 'Hero component mounted',
       data: {
-        imageSrc: '/images/hero-bg_vienna.webp',
+        imageSrc: '/images/hero-bg_vienna_white.webp',
         ctaText: t.hero.cta,
         ctaClassName: 'bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 mb-12 md:mb-16'
       },
@@ -869,7 +869,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <img 
           ref={heroImageRef}
-          src="/images/hero-bg_vienna.webp" 
+          src="/images/hero-bg_vienna_white.webp" 
           alt="" 
           className="w-full h-full object-cover"
           style={{ display: 'block' }}
@@ -901,7 +901,7 @@ const Hero = () => {
                 imageSrc: img?.src,
                 error: e.type,
                 windowLocation: window.location.href,
-                attemptedSrc: '/images/hero-bg_vienna.webp'
+                attemptedSrc: '/images/hero-bg_vienna_white.webp'
               },
               timestamp: Date.now(),
               sessionId: 'debug-session',
