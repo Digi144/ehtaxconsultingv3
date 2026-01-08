@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { 
   CheckCircle2, 
   Mail, 
@@ -589,7 +589,7 @@ const Navbar = () => {
             {/* CTA Button */}
             <a 
               href="#kontakt" 
-              className="ml-6 bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20"
+              className="ml-6 bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 inline-block"
             >
               {t.nav.contactCta}
             </a>
@@ -676,6 +676,154 @@ const Navbar = () => {
 
 const Hero = () => {
   const { t } = useLanguage();
+  const heroImageRef = useRef(null);
+  const heroCtaRef = useRef(null);
+  
+  // #region agent log
+  useEffect(() => {
+    const logData = {
+      location: 'App.jsx:Hero:useEffect',
+      message: 'Hero component mounted',
+      data: {
+        imageSrc: '/images/hero-bg.webp',
+        ctaText: t.hero.cta,
+        ctaClassName: 'bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 mb-12 md:mb-16'
+      },
+      timestamp: Date.now(),
+      sessionId: 'debug-session',
+      runId: 'run1',
+      hypothesisId: 'A'
+    };
+    fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logData)}).catch(()=>{});
+  }, [t.hero.cta]);
+  // #endregion
+  
+  // #region agent log
+  useEffect(() => {
+    if (heroImageRef.current) {
+      const img = heroImageRef.current;
+      const logImageLoad = (event, status) => {
+        const logData = {
+          location: 'App.jsx:Hero:imageLoad',
+          message: `Hero image ${status}`,
+          data: {
+            imageSrc: img.src,
+            imageComplete: img.complete,
+            imageNaturalWidth: img.naturalWidth,
+            imageNaturalHeight: img.naturalHeight,
+            imageClientWidth: img.clientWidth,
+            imageClientHeight: img.clientHeight,
+            imageCurrentSrc: img.currentSrc || img.src
+          },
+          timestamp: Date.now(),
+          sessionId: 'debug-session',
+          runId: 'run1',
+          hypothesisId: 'A'
+        };
+        fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logData)}).catch(()=>{});
+      };
+      img.addEventListener('load', () => logImageLoad('loaded', 'loaded'));
+      img.addEventListener('error', () => logImageLoad('error', 'failed'));
+      if (img.complete) logImageLoad('already', 'already loaded');
+      return () => {
+        img.removeEventListener('load', logImageLoad);
+        img.removeEventListener('error', logImageLoad);
+      };
+    }
+  }, []);
+  // #endregion
+  
+  // #region agent log
+  useEffect(() => {
+    const checkButtonStyles = () => {
+      const heroCta = heroCtaRef.current;
+      const headerCta = document.querySelector('nav a[href="#kontakt"]:not([ref])') || 
+                       Array.from(document.querySelectorAll('nav a[href="#kontakt"]')).find(el => 
+                         el.textContent?.includes(t.nav.contactCta) || el.classList.contains('ml-6')
+                       );
+      
+      const logRefs = {
+        location: 'App.jsx:Hero:buttonStyles:refs',
+        message: 'Checking button availability',
+        data: {
+          heroCtaRefExists: !!heroCta,
+          headerCtaFound: !!headerCta,
+          heroCtaText: heroCta?.textContent?.trim(),
+          headerCtaText: headerCta?.textContent?.trim()
+        },
+        timestamp: Date.now(),
+        sessionId: 'debug-session',
+        runId: 'run1',
+        hypothesisId: 'B'
+      };
+      fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logRefs)}).catch(()=>{});
+      
+      if (heroCta && headerCta) {
+        const heroStyles = window.getComputedStyle(heroCta);
+        const headerStyles = window.getComputedStyle(headerCta);
+        const logData = {
+          location: 'App.jsx:Hero:buttonStyles',
+          message: 'CTA button computed styles comparison',
+          data: {
+            heroButton: {
+              width: heroCta.offsetWidth,
+              height: heroCta.offsetHeight,
+              paddingLeft: heroStyles.paddingLeft,
+              paddingRight: heroStyles.paddingRight,
+              paddingTop: heroStyles.paddingTop,
+              paddingBottom: heroStyles.paddingBottom,
+              fontSize: heroStyles.fontSize,
+              display: heroStyles.display,
+              text: heroCta.textContent?.trim(),
+              className: heroCta.className
+            },
+            headerButton: {
+              width: headerCta.offsetWidth,
+              height: headerCta.offsetHeight,
+              paddingLeft: headerStyles.paddingLeft,
+              paddingRight: headerStyles.paddingRight,
+              paddingTop: headerStyles.paddingTop,
+              paddingBottom: headerStyles.paddingBottom,
+              fontSize: headerStyles.fontSize,
+              display: headerStyles.display,
+              text: headerCta.textContent?.trim(),
+              className: headerCta.className
+            }
+          },
+          timestamp: Date.now(),
+          sessionId: 'debug-session',
+          runId: 'run1',
+          hypothesisId: 'B'
+        };
+        fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logData)}).catch(()=>{});
+      } else {
+        const logMissing = {
+          location: 'App.jsx:Hero:buttonStyles:missing',
+          message: 'Buttons not found',
+          data: {
+            heroCtaRefExists: !!heroCta,
+            headerCtaFound: !!headerCta
+          },
+          timestamp: Date.now(),
+          sessionId: 'debug-session',
+          runId: 'run1',
+          hypothesisId: 'B'
+        };
+        fetch('http://127.0.0.1:7243/ingest/c1ccd82c-6bf2-4a29-a196-33a023b05a59',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(logMissing)}).catch(()=>{});
+      }
+    };
+    const timeout1 = setTimeout(checkButtonStyles, 500);
+    const timeout2 = setTimeout(checkButtonStyles, 1500);
+    const timeout3 = setTimeout(checkButtonStyles, 3000);
+    window.addEventListener('resize', checkButtonStyles);
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+      clearTimeout(timeout3);
+      window.removeEventListener('resize', checkButtonStyles);
+    };
+  }, [t.nav.contactCta]);
+  // #endregion
   
   const features = [
     {
@@ -700,6 +848,7 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
+          ref={heroImageRef}
           src="/images/hero-bg.webp" 
           alt="" 
           className="w-full h-full object-cover"
@@ -724,8 +873,9 @@ const Hero = () => {
           </p>
           
           <a 
+            ref={heroCtaRef}
             href="#kontakt" 
-            className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 mb-12 md:mb-16"
+            className="bg-[#1e3a5f] text-white px-6 py-3 text-sm font-semibold transition-all hover:bg-[#2a4d7a] shadow-lg shadow-[#1e3a5f]/20 mb-12 md:mb-16 inline-block"
           >
             {t.hero.cta}
           </a>
