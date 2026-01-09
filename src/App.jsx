@@ -1017,7 +1017,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-white/40 z-10"></div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28 pb-16 md:pb-24 flex-grow flex flex-col">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-28 pb-16 md:pb-24 flex-grow flex flex-col">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
